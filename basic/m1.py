@@ -24,15 +24,14 @@ class Item:
     def instantiate_from_csv(cls):
         with open('items.csv', 'r') as f:
             reader = csv.DictReader(f)
-            items = list(reader)
-        return items
+            things = list(reader)
 
-        # for item in items:
-        #     Item(
-        #         name=item.get('name'),
-        #         price=float(item.get('price')),
-        #         quantity=int(item.get('quantity')),
-        #     )
+        for item in things:
+            Item(
+                name=item.get('name'),
+                price=float(item.get('price')),
+                quantity=int(item.get('quantity')),
+            )
 
     def calculate_total_price(self):
         return self.price * self.quantity
@@ -45,9 +44,6 @@ class Item:
         return f"Item('{self.name}', '{self.price}', '{self.quantity}')"
 
 
-# Item.instantiate_from_csv()
-# print(Item.all)
-
-items = Item.instantiate_from_csv()
-
+Item.instantiate_from_csv()
+print(Item.all)
 
