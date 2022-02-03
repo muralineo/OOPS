@@ -53,18 +53,23 @@ class Item:
 
     # To print all the values in the instance
     def __repr__(self):
-        return f"Item('{self.name}', '{self.price}', '{self.quantity}')"
+        return f"{self.__class__.__name__}('{self.name}', '{self.price}', '{self.quantity}')"
 
 
 class Phone(Item):
-    pass
+
+    def __init__(self, name: str, price: float, quantity=0, broken_phones=0):
+        # If the price should not be negative, we can run validations using assert
+        super().__init__(name, price, quantity)
+        assert broken_phones >= 0, f"Broken phones {broken_phones} should not be greater than Zero!!!"
+
+        # Assign to self object
+        self.broken_phones = broken_phones
 
 
-phone1 = Item("jscPhonev10", 500, 5)
-phone1.broken_phones = 1
-phone2 = Item("jscPhonev20", 700, 5)
-phone2.broken_phones = 1
-
-# Item.instantiate_from_csv()
+phone1 = Phone("jscPhonev10", 500, 5, 1)
+print(phone1.calculate_total_price())
+phone2 = Phone("jscPhonev20", 700, 5, 1)
+item = Item("Samsung", 500, 4)
 print(Item.all)
-# print(Item.is_integer(7.5))
+print(Phone.all)
